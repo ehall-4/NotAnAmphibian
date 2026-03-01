@@ -61,6 +61,14 @@ async def startserver(ctx):
     
     await ctx.send("Minecraft server is running!")
    
+async def stopserver(ctx):
+    await ctx.send("Stopping minecraft server...")
+    
+    subprocess.Popen([
+        "sudo", "-u", "minecraft",
+        "/opt/minecraft/server/stop.sh"
+        ])
+
 @bot.command()
 async def shutdown(ctx):
     if ctx.author.id != OWNER_ID:
