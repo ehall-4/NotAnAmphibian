@@ -47,7 +47,7 @@ async def on_message(message):
 # '!' Commands
 # ------------------------------------------------
     
-@bot.command(name="Start Server")
+@bot.command(name="start", description="Starts the game server of the channel you're in.")
 async def start(ctx):
     if ctx.channel.id == BLOCKBOIS_ID:
         
@@ -63,7 +63,7 @@ async def start(ctx):
     
     await ctx.send("This command can only be used in game channels like #block-bois")
 
-@bot.command()   
+@bot.command(name="stop", description="Stops the game server of the channel you're in.")
 async def stop(ctx):
     if ctx.channel.id == BLOCKBOIS_ID:
         await ctx.send("Stopping minecraft server...")
