@@ -56,7 +56,7 @@ async def startserver(ctx):
     
     subprocess.Popen([
         "sudo", "-u", "minecraft",
-        "/opt/server/start.sh"
+        "/opt/minecraft/server/start.sh"
         ])
     
     await ctx.send("Minecraft server is running!")
