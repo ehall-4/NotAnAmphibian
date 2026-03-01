@@ -58,7 +58,7 @@ async def start(ctx):
             "/opt/minecraft/server/start.sh"
         ])
     
-        await ctx.send("Minecraft server is running!")
+        await ctx.send(f"Minecraft server is running on {os.getenv('IP_ADDRESS')}:{os.getenv('PORT')}!")
         return
     
     await ctx.send("This command can only be used in game channels like #block-bois")
