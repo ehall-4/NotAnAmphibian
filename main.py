@@ -13,6 +13,7 @@ load_dotenv()
 token = os.getenv('DISCORD_TOKEN')
 
 OWNER_ID = 127634987854987264
+BLOCKBOIS_ID = 1315843683811201056
 
 # ------------------------------------------------
 # Initialize bot, logging and intents
@@ -45,32 +46,37 @@ async def on_message(message):
 # ------------------------------------------------
 # '!' Commands
 # ------------------------------------------------
-
-@bot.command()
-async def hello(ctx):
-    await ctx.reply(f"Hello {ctx.author.mention}!")
     
-@bot.command()
-async def startserver(ctx):
-    await ctx.send("Starting Minecraft server...")
-    
-    subprocess.Popen([
-        "sudo", "-u", "minecraft",
-        "/opt/minecraft/server/start.sh"
+@bot.command(name="Start Server")
+async def start(ctx):
+    if ctx.channel.id == BLOCKBOIS_ID:
+        
+        await ctx.send("Starting Minecraft server...")    
+        
+        subprocess.Popen([
+            "sudo", "-u", "minecraft",
+            "/opt/minecraft/server/start.sh"
         ])
     
-    await ctx.send("Minecraft server is running!")
+        await ctx.send("Minecraft server is running!")
+        return
+    
+    await ctx.send("This command can only be used in game channels like #block-bois")
 
 @bot.command()   
-async def stopserver(ctx):
-    await ctx.send("Stopping minecraft server...")
+async def stop(ctx):
+    if ctx.channel.id == BLOCKBOIS_ID:
+        await ctx.send("Stopping minecraft server...")
     
-    subprocess.Popen([
-        "sudo", "-u", "minecraft",
-        "/opt/minecraft/server/stop.sh"
+        subprocess.Popen([
+            "sudo", "-u", "minecraft",
+            "/opt/minecraft/server/stop.sh"
         ])
+        return
+    
+    await ctx.send("This command can only be used in game channels like #block-bois")
 
-@bot.command()
+@bot.command(name="shutdown", hidden=True)
 async def shutdown(ctx):
     if ctx.author.id != OWNER_ID:
         await ctx.send("You do not have permission to use this command.")
