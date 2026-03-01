@@ -60,7 +60,8 @@ async def startserver(ctx):
         ])
     
     await ctx.send("Minecraft server is running!")
-   
+
+@bot.command()   
 async def stopserver(ctx):
     await ctx.send("Stopping minecraft server...")
     
